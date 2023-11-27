@@ -126,7 +126,7 @@ publishing {
     repositories {
         maven {
             name = "GitHubPackages"
-            url = uri(path = "https://maven.pkg.github.com/miroslavhybler/android-gazelle/")
+            url = uri(path = "https://maven.pkg.github.com/miroslavhybler/jet-animated-icons/")
 
             val githubProperties = Properties()
             githubProperties.load(FileInputStream(rootProject.file("github.properties")))
