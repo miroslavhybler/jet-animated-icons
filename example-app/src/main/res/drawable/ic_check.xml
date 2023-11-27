@@ -1,0 +1,22 @@
+<vector xmlns:android="http://schemas.android.com/apk/res/android"
+    android:name="vector"
+    android:width="24dp"
+    android:height="24dp"
+    android:viewportWidth="96"
+    android:viewportHeight="96">
+    <path
+        android:name="circlePath"
+        android:pathData="M 48 84 C 67.882 84 84 67.882 84 48 C 84 28.118 67.882 12 48 12 C 28.118 12 12 28.118 12 48 C 12 67.882 28.118 84 48 84 Z"
+        android:strokeWidth="6"
+        android:strokeColor="#000000"
+        android:strokeLineCap="round"
+        android:strokeLineJoin="round" />
+    <path
+        android:name="checkPath"
+        android:pathData="M 32 49.713 L 41.595 60 L 64 36"
+        android:strokeWidth="6"
+        android:strokeColor="#000000"
+        android:strokeLineCap="round"
+        android:strokeLineJoin="round" />
+</vector>
+
