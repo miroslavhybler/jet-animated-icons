@@ -115,10 +115,10 @@ publishing {
         register<MavenPublication>("jet-animated-icons-publish") {
             groupId = "mir.oslav.jet"
             artifactId = "animated-icons"
-            version = "1.0.0-alpha01"
+            version = "1.0.0-alpha02"
 
             afterEvaluate {
-                from(components["release"])
+                from(components.getByName("release"))
             }
         }
     }
@@ -126,7 +126,7 @@ publishing {
     repositories {
         maven {
             name = "GitHubPackages"
-            url = uri(path = "https://maven.pkg.github.com/miroslavhybler/jet-animated-icons/")
+            url = uri(path = "https://maven.pkg.github.com/miroslavhybler/jet-animated-icons")
 
             val githubProperties = Properties()
             githubProperties.load(FileInputStream(rootProject.file("github.properties")))

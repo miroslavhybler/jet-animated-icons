@@ -39,6 +39,7 @@ import mir.oslav.jet.annotations.JetExperimental
  * @author Miroslav Hýbler <br>
  * created on 26.11.2023
  */
+//TODO geters for paths and groups
 public class AnimatedIconState internal constructor(
     internal val animatedIcon: AnimatedIcon,
     internal val original: ImageVector
@@ -110,6 +111,24 @@ public class AnimatedIconState internal constructor(
 
 
     /**
+     * Tries to find path within this icon by given [name]
+     * @param name Name of the path
+     * @throws NullPointerException When path was not found within this icon
+     * @return Found path by [name]
+     * @since 1.0.0
+     */
+    public fun getPath(name: String): AnimatedVectorPath {
+        val path = animatedIcon.allPaths[name]
+
+        require(value = path != null, lazyMessage = {
+            "Path \"$name\" was not found in icon \"${original.name}\""
+        })
+
+        return path
+    }
+
+
+    /**
      * Tries to find an [AnimatedVectorGroup] by [name] and calls [block] on it.
      * Animations work little different than in animated-vector drawables, all animations are relative
      * to [AnimatedVectorPath] including group animations like rotation, scale and translation. To see
@@ -130,6 +149,24 @@ public class AnimatedIconState internal constructor(
                 "Group with name \"$name\" was not found in icon ${original.name}, animation will not do anything"
             )
         }
+    }
+
+
+    /**
+     * Tries to find group within this icon by given [name]
+     * @param name Name of the group
+     * @throws NullPointerException When group was not found within this icon
+     * @return Found path by [name]
+     * @since 1.0.0
+     */
+    public fun getGroup(name: String): AnimatedVectorGroup {
+        val group = animatedIcon.allGroups[name]
+
+        require(value = group != null, lazyMessage = {
+            "Group \"$name\" was not found in icon \"${original.name}\""
+        })
+
+        return group
     }
 
 
@@ -189,6 +226,7 @@ public fun rememberAnimatedIconState(
  * @param state
  * @since 1.0.0
  */
+//TODO enable default tint
 @Composable
 @JetExperimental
 public fun JetIcon(

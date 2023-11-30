@@ -90,4 +90,38 @@ public class AnimatedVectorGroup internal constructor(
         }
     }
 
+    /**
+     * Tries to find path within this group by given [name]
+     * @param name Name of the path
+     * @throws NullPointerException When path was not found within this group
+     * @return Found path by [name]
+     * @since 1.0.0
+     */
+    public fun getPath(name: String): AnimatedVectorPath {
+        val path = paths[name]
+
+        require(value = path != null, lazyMessage = {
+            "Path \"$name\" was not found in group \"${name}\""
+        })
+
+        return path
+    }
+
+
+    /**
+     * Tries to find group within this group by given [name]
+     * @param name Name of the group
+     * @throws NullPointerException When group was not found within this group
+     * @return Found path by [name]
+     * @since 1.0.0
+     */
+    public fun getGroup(name: String): AnimatedVectorGroup {
+        val group = groups[name]
+
+        require(value = group != null, lazyMessage = {
+            "Group \"$name\" was not found in group \"${name}\""
+        })
+
+        return group
+    }
 }
