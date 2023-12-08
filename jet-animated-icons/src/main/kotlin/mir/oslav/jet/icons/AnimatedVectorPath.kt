@@ -287,4 +287,27 @@ public class AnimatedVectorPath internal constructor(
          */
     }
 
+
+    /**
+     * Stops all the running animations on this path
+     * @since 1.0.0
+     */
+    suspend fun stop() {
+        fillAlpha.stop()
+        strokeAlpha.stop()
+        strokeLineWidth.stop()
+        strokeLineMiter.stop()
+        trimPathStart.stop()
+        trimPathEnd.stop()
+        trimPathOffset.stop()
+
+        tintColor.stop()
+        rotationX.stop()
+        rotationZ.stop()
+        scaleX.stop()
+        scaleY.stop()
+        translationX.stop()
+        translationY.stop()
+    }
+
 }

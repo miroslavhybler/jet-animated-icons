@@ -49,6 +49,9 @@ android {
     kotlinOptions {
         jvmTarget = "1.8"
     }
+    kotlin {
+        jvmToolchain(jdkVersion = 8)
+    }
     publishing {
         multipleVariants {
             withSourcesJar()
@@ -58,9 +61,9 @@ android {
 }
 
 dependencies {
-    
+
     implementation("mir.oslav.jet:annotations:1.0.0")
-    implementation("mir.oslav.jet:utils:1.0.1")
+    implementation("mir.oslav.jet:utils:1.0.2")
 
     implementation("androidx.core:core-ktx:1.12.0")
     implementation("androidx.appcompat:appcompat:1.6.1")
@@ -115,7 +118,7 @@ publishing {
         register<MavenPublication>("jet-animated-icons-publish") {
             groupId = "mir.oslav.jet"
             artifactId = "animated-icons"
-            version = "1.0.0-alpha02"
+            version = "1.0.0-alpha03"
 
             afterEvaluate {
                 from(components.getByName("release"))

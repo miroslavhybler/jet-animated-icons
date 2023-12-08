@@ -38,4 +38,13 @@ internal class AnimatedIcon internal constructor(
     suspend fun snapToInitial() {
         allPaths.forEach { (_, path) -> path.snapToInitialValues() }
     }
+
+
+    /**
+     * Stops all the running animations on this icon
+     * @since 1.0.0
+     */
+    suspend fun stop() {
+        allPaths.forEach { (_, path) -> path.stop() }
+    }
 }

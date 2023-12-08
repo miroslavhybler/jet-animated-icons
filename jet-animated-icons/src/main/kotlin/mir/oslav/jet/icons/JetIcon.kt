@@ -187,6 +187,15 @@ public class AnimatedIconState internal constructor(
     public suspend fun snapToInitial() {
         animatedIcon.snapToInitial()
     }
+
+
+    /**
+     * Stops all the running animations on this path
+     * @since 1.0.0
+     */
+    public suspend fun stop() {
+        animatedIcon.stop()
+    }
 }
 
 

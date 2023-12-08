@@ -1,18 +1,13 @@
 package jet.icons.example
 
 import android.os.Bundle
-import android.util.Log
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
-import androidx.compose.animation.core.EaseInBounce
 import androidx.compose.animation.core.EaseInOutExpo
 import androidx.compose.animation.core.EaseOutBack
-import androidx.compose.animation.core.EaseOutBounce
-import androidx.compose.animation.core.EaseOutElastic
 import androidx.compose.animation.core.FastOutSlowInEasing
 import androidx.compose.animation.core.LinearEasing
 import androidx.compose.animation.core.tween
-import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.ColumnScope
@@ -33,7 +28,6 @@ import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
 import androidx.compose.material3.TopAppBar
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.DisposableEffect
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
@@ -44,18 +38,15 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.TransformOrigin
 import androidx.compose.ui.layout.ContentScale
-import androidx.compose.ui.platform.LocalLifecycleOwner
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
-import androidx.lifecycle.Lifecycle
-import androidx.lifecycle.LifecycleEventObserver
-import androidx.lifecycle.LifecycleObserver
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
+import mir.oslav.jet.icons.InfiniteAnimationEffect
 import mir.oslav.jet.icons.JetIcon
 import mir.oslav.jet.icons.JetImage
 import mir.oslav.jet.icons.rememberAnimatedIconState
-import mir.oslav.jet.icons.rememberInifiniteAnimationState
+import mir.oslav.jet.icons.rememberInfiniteAnimationState
 
 /**
  * @author Miroslav Hýbler <br>
@@ -137,12 +128,11 @@ fun LazyGridScope.jetIconItem(
 
 fun LazyGridScope.infiniteColored() {
     jetIconItem(title = "Infinite, colored") {
-        val animationState = rememberInifiniteAnimationState(
+        val animationState = rememberInfiniteAnimationState(
             iconState = rememberAnimatedIconState(id = R.drawable.ic_blocks)
         )
 
-        LaunchedEffect(key1 = Unit, block = {
-            animationState.iconState.snapToInitial()
+        InfiniteAnimationEffect(state = animationState, block = {
             while (true) {
                 animationState.iconState.animatePathsIndexed { index ->
                     launch {
@@ -427,15 +417,14 @@ fun LazyGridScope.wind() {
 fun LazyGridScope.swipe() {
     jetIconItem(title = "Custom transform origin of hand") {
 
-        val animationState = rememberInifiniteAnimationState(
+        val animationState = rememberInfiniteAnimationState(
             iconState = rememberAnimatedIconState(
                 id = R.drawable.ic_swipe,
                 defaultTintColor = MaterialTheme.colorScheme.onBackground
             )
         )
 
-
-        LaunchedEffect(key1 = Unit, block = {
+        InfiniteAnimationEffect(state = animationState, block = {
             delay(timeMillis = 1200L)
             while (true) {
                 launch {
@@ -472,7 +461,6 @@ fun LazyGridScope.swipe() {
                 delay(timeMillis = 1600)
             }
         })
-
 
         JetIcon(
             state = animationState.iconState,

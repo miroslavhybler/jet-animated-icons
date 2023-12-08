@@ -17,17 +17,20 @@ dependencyResolutionManagement {
 **Application's module build.gradle.kts**
 ```kotlin
 dependencies {
-    implementation("mir.oslav.jet:animated-icons:1.0.0-alpha01")
+    implementation("mir.oslav.jet:animated-icons:1.0.0-alpha03")
 }
 ```
 
 ## Usage
+Use _rememberAnimatedIconState_ for simple animations and _rememberInfiniteAnimationState_ 
+with InfiniteAnimationEffect for infinite animations.
 
+### Simple one time animation
 ```kotlin
 //Scope for animations
 val coroutineScope = rememberCoroutineScope()
 
-//Remembers icon
+//Remembers icon and animation state
 val iconState = rememberAnimatedIconState(
     id = R.drawable.ic_timer,
     defaultTintColor = MaterialTheme.colorScheme.onBackground
@@ -41,7 +44,7 @@ JetIcon(
         .clickable(
             onClick = {
                 coroutineScope.launch {
-                    // Animates path "handpats" rotation around z axis
+                    // Animates path "handpats" rotation around z axis when you click the icon
                     iconState.animatePath(name = "handPath") {
                         rotationZ.animateTo(
                             targetValue = rotationZ.value + 360f,
@@ -54,6 +57,41 @@ JetIcon(
                 }
             }
         )
+)
+```
+
+### Infinite Animation
+```kotlin
+//Remembers icon and animation state
+val iconState = rememberAnimatedIconState(
+    id = R.drawable.ic_timer,
+    defaultTintColor = MaterialTheme.colorScheme.onBackground
+)
+
+val infiniteAnimationState = rememberInfiniteAnimationState(
+    iconState = iconState
+)
+
+//Infinitely animating rotationZ value
+InfiniteAnimationEffect {
+    while (true) {
+        iconState.animatePath(name = "handPath") {
+            rotationZ.animateTo(
+                targetValue = rotationZ.value + 360f,
+                tween(
+                    durationMillis = 1200,
+                    easing = FastOutSlowInEasing
+                )
+            )
+        }
+    }
+}
+
+//Draws the icon
+JetIcon(
+    state = iconState,
+    modifier = Modifier
+        .size(size = 72.dp)
 )
 ```
 
