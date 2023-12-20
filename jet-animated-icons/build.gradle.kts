@@ -67,13 +67,13 @@ dependencies {
 
     implementation("androidx.core:core-ktx:1.12.0")
     implementation("androidx.appcompat:appcompat:1.6.1")
-    implementation("com.google.android.material:material:1.10.0")
+    implementation("com.google.android.material:material:1.11.0")
 
     /** Compose */
     val composeVersion = "1.5.4"
     implementation("androidx.compose.ui:ui:$composeVersion")
     implementation("androidx.compose.ui:ui-tooling-preview:$composeVersion")
-    implementation("androidx.activity:activity-compose:1.8.1")
+    implementation("androidx.activity:activity-compose:1.8.2")
     implementation("androidx.compose.material:material:$composeVersion")
     implementation("androidx.compose.material3:material3:1.1.2")
     implementation("androidx.compose.material3:material3-window-size-class:1.1.2")
@@ -115,31 +115,16 @@ tasks.dokkaHtml.configure {
 
 publishing {
     publications {
-        register<MavenPublication>("jet-animated-icons-publish") {
+        create<MavenPublication>("maven") {
             groupId = "mir.oslav.jet"
             artifactId = "animated-icons"
             version = "1.0.0-alpha03"
-
-            afterEvaluate {
-                from(components.getByName("release"))
+            pom {
+                description.set("Fix of infinite animations")
             }
         }
     }
-
     repositories {
-        maven {
-            name = "GitHubPackages"
-            url = uri(path = "https://maven.pkg.github.com/miroslavhybler/jet-animated-icons")
-
-            val githubProperties = Properties()
-            githubProperties.load(FileInputStream(rootProject.file("github.properties")))
-            val username = githubProperties["github.username"].toString()
-            val token = githubProperties["github.token"].toString()
-
-            credentials {
-                this.username = username
-                this.password = token
-            }
-        }
+        mavenLocal()
     }
 }

@@ -1,0 +1,8 @@
+# configuration file for building snapshots and releases with jitpack.io
+jdk:
+  - openjdk17
+before_install:
+  - ./scripts/prepareJitpackEnvironment.sh
+install:
+  - FILE="-Dfile=/Users/miroslavhybler/Projekty/myWork/jet-icons/jet-animated-icons/build/outputs/aar/jet-animated-icons-release.aar"
+  - mvn install:install-file $FILE -DgroupId=mir.oslav.jet -DartifactId=animated-icons -Dversion=1.0.0-alpha03 -Dpackaging=aar -DgeneratePom=true
