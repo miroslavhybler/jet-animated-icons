@@ -4,7 +4,7 @@
     <modelVersion>4.0.0</modelVersion>
     <groupId>mir.oslav.jet</groupId>
     <artifactId>animated-icons</artifactId>
-    <version>1.0.0-alpha03</version>
+    <version>1.0.0-alpha04</version>
     <packaging>pom</packaging>
     <description>Fix of infinite animations</description>
 </project>

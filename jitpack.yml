@@ -5,4 +5,4 @@ before_install:
   - ./scripts/prepareJitpackEnvironment.sh
 install:
   - FILE="-Dfile=jet-animated-icons-release.aar"
-  - mvn install:install-file $FILE -DgroupId=mir.oslav.jet -DartifactId=animated-icons -Dversion=1.0.0-alpha03 -Dpackaging=aar -DgeneratePom=true
+  - mvn install:install-file $FILE -DgroupId=mir.oslav.jet -DartifactId=animated-icons -Dversion=1.0.0-alpha04 -Dpackaging=aar -DgeneratePom=true
