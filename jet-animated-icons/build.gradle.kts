@@ -1,3 +1,5 @@
+@file:Suppress("UnstableApiUsage")
+
 import org.jetbrains.dokka.DokkaConfiguration
 import java.io.FileInputStream
 import java.util.Properties
@@ -58,6 +60,14 @@ android {
             withJavadocJar()
         }
     }
+}
+
+java {
+    toolchain {
+        languageVersion = JavaLanguageVersion.of(8)
+    }
+    sourceCompatibility = JavaVersion.VERSION_1_8
+    targetCompatibility = JavaVersion.VERSION_1_8
 }
 
 dependencies {

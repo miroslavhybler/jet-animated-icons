@@ -6,5 +6,5 @@
     <artifactId>animated-icons</artifactId>
     <version>1.0.0-alpha03</version>
     <packaging>pom</packaging>
-    <description>First version release</description>
+    <description>Fix of infinite animations</description>
 </project>
