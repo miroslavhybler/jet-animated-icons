@@ -123,15 +123,18 @@ tasks.dokkaHtml.configure {
     }
 }
 
-publishing {
-    publications {
-        create<MavenPublication>("maven") {
-            groupId = "mir.oslav.jet"
-            artifactId = "animated-icons"
-            version = "1.0.0-alpha05"
+afterEvaluate {
+    publishing {
+        publications {
+            create<MavenPublication>("release") {
+                groupId = "mir.oslav.jet"
+                artifactId = "animated-icons"
+                version = "1.0.0-alpha05"
+            }
+
         }
-    }
-    repositories {
-        mavenLocal()
+        repositories {
+            mavenLocal()
+        }
     }
 }

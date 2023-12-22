@@ -17,7 +17,7 @@ dependencyResolutionManagement {
 **Application's module build.gradle.kts**
 ```kotlin
 dependencies {
-    implementation("mir.oslav.jet:animated-icons:1.0.0-alpha03")
+    implementation("mir.oslav.jet:animated-icons:1.0.0-alpha05")
 }
 ```
 
