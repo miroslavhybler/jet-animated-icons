@@ -128,10 +128,7 @@ publishing {
         create<MavenPublication>("maven") {
             groupId = "mir.oslav.jet"
             artifactId = "animated-icons"
-            version = "1.0.0-alpha04"
-            pom {
-                description.set("Fix of infinite animations")
-            }
+            version = "1.0.0-alpha05"
         }
     }
     repositories {
