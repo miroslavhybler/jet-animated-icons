@@ -45,14 +45,14 @@ android {
         kotlinCompilerExtensionVersion = "1.5.3"
     }
     compileOptions {
-        sourceCompatibility = JavaVersion.VERSION_11
-        targetCompatibility = JavaVersion.VERSION_11
+        sourceCompatibility = JavaVersion.VERSION_1_8
+        targetCompatibility = JavaVersion.VERSION_1_8
     }
     kotlinOptions {
-        jvmTarget = "11"
+        jvmTarget = "1.8"
     }
     kotlin {
-        jvmToolchain(jdkVersion = 11)
+        jvmToolchain(jdkVersion = 8)
     }
     publishing {
         multipleVariants {
@@ -127,7 +127,7 @@ afterEvaluate {
     publishing {
         publications {
             create<MavenPublication>("release") {
-                from (components.findByName("release"))
+                from (components.getByName("release"))
                 groupId = "mir.oslav.jet"
                 artifactId = "animated-icons"
                 version = "1.0.0-alpha06"
