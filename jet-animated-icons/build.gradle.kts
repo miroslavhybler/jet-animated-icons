@@ -130,7 +130,7 @@ afterEvaluate {
                 from (components.getByName("release"))
                 groupId = "mir.oslav.jet"
                 artifactId = "animated-icons"
-                version = "1.0.0-alpha07"
+                version = "1.0.0-alpha08"
                 pom {
                     description.set("Jitpack.io deploy")
                 }
