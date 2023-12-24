@@ -72,8 +72,8 @@ java {
 
 dependencies {
 
-    implementation("mir.oslav.jet:annotations:1.0.0")
-    implementation("mir.oslav.jet:utils:1.0.2")
+    implementation("com.github.miroslavhybler:jet-annotations:1.0.2")
+    implementation("com.github.miroslavhybler:jet-utils:1.0.2")
 
     implementation("androidx.core:core-ktx:1.12.0")
     implementation("androidx.appcompat:appcompat:1.6.1")
