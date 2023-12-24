@@ -9,7 +9,7 @@ Jet Animated Icons is an experimental library for vector drawable animations. Ev
 // Adds maven 
 dependencyResolutionManagement {
     repositories {
-        maven(url = "https://maven.pkg.github.com/miroslavhybler/Maven")
+        maven(url = "https://jitpack.io")
     }
 }
 ```
@@ -17,7 +17,7 @@ dependencyResolutionManagement {
 **Application's module build.gradle.kts**
 ```kotlin
 dependencies {
-    implementation("mir.oslav.jet:animated-icons:1.0.0-alpha07")
+    implementation("com.github.miroslavhybler:animated-icons:1.0.0-alpha07")
 }
 ```
 
