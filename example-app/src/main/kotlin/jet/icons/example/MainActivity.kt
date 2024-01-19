@@ -128,9 +128,7 @@ fun LazyGridScope.jetIconItem(
 
 fun LazyGridScope.infiniteColored() {
     jetIconItem(title = "Infinite, colored") {
-        val animationState = rememberInfiniteAnimationState(
-            iconState = rememberAnimatedIconState(id = R.drawable.ic_blocks)
-        )
+        val animationState = rememberInfiniteAnimationState(id = R.drawable.ic_blocks)
 
         InfiniteAnimationEffect(state = animationState, block = {
             while (true) {
@@ -417,12 +415,11 @@ fun LazyGridScope.wind() {
 fun LazyGridScope.swipe() {
     jetIconItem(title = "Custom transform origin of hand") {
 
-        val animationState = rememberInfiniteAnimationState(
-            iconState = rememberAnimatedIconState(
-                id = R.drawable.ic_swipe,
-                defaultTintColor = MaterialTheme.colorScheme.onBackground
-            )
+        rememberAnimatedIconState(
+            id = R.drawable.ic_swipe,
+            defaultTintColor = MaterialTheme.colorScheme.onBackground
         )
+        val animationState = rememberInfiniteAnimationState(id = R.drawable.ic_swipe)
 
         InfiniteAnimationEffect(state = animationState, block = {
             delay(timeMillis = 1200L)

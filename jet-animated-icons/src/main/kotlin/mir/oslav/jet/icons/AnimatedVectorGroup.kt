@@ -1,3 +1,5 @@
+@file:Suppress("RedundantVisibilityModifier")
+
 package mir.oslav.jet.icons
 
 import android.util.Log

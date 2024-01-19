@@ -5,7 +5,8 @@ package mir.oslav.jet.icons
  * Represents a vector drawable.
  * Animations work little different than in animated-vector drawables, all animations are relative
  * to [AnimatedVectorPath] including group animations like rotation, scale and translation. To see
- * all possible properties for animation look at [AnimatedVectorPath].
+ * all possible properties for animation look at [AnimatedVectorPath]. Always remember that all paths
+ * and groups must have name.
  * @param root Root group of vector drawable
  * @param allPaths All paths extracted from [root] and from [allGroups] in vector drawable, associated by
  * path name.
@@ -25,7 +26,7 @@ internal class AnimatedIcon internal constructor(
      * Snaps all animations of all paths within this icon to the target state.
      * @since 1.0.0
      */
-    suspend fun snapToTargets() {
+    internal suspend fun snapToTargets() {
         allPaths.forEach { (_, path) -> path.snapToTarget() }
     }
 
@@ -35,7 +36,7 @@ internal class AnimatedIcon internal constructor(
      * to the initial state.
      * @since 1.0.0
      */
-    suspend fun snapToInitial() {
+    internal suspend fun snapToInitial() {
         allPaths.forEach { (_, path) -> path.snapToInitialValues() }
     }
 
@@ -44,7 +45,7 @@ internal class AnimatedIcon internal constructor(
      * Stops all the running animations on this icon
      * @since 1.0.0
      */
-    suspend fun stop() {
+    internal suspend fun stop() {
         allPaths.forEach { (_, path) -> path.stop() }
     }
 }

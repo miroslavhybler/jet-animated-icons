@@ -1,6 +1,11 @@
 # Jet Animated Icons
 
-Jet Animated Icons is an experimental library for vector drawable animations. Every path from drawable has it's own painter and Icon component. Path properties are animated using [Animatable](https://developer.android.com/jetpack/compose/animation/value-based#animatable).
+Jet Animated Icons is an experimental library for vector drawable animations. 
+Every path from drawable has it's own painter and Icon component. 
+Path properties are animated using [Animatable](https://developer.android.com/jetpack/compose/animation/value-based#animatable).
+All paths and groups withing drawable must have a name. Keep in mind that this library is for faster 
+solution, not for the best one, for the best possible performance you have to override rememberVectorPainter
+by yourself.
 
 ## Add library to your project
 
@@ -17,7 +22,7 @@ dependencyResolutionManagement {
 **Application's module build.gradle.kts**
 ```kotlin
 dependencies {
-    implementation("com.github.miroslavhybler:animated-icons:1.0.0-alpha08")
+    implementation("com.github.miroslavhybler:animated-icons:1.0.0-alpha09")
 }
 ```
 
@@ -63,13 +68,8 @@ JetIcon(
 ### Infinite Animation
 ```kotlin
 //Remembers icon and animation state
-val iconState = rememberAnimatedIconState(
-    id = R.drawable.ic_timer,
-    defaultTintColor = MaterialTheme.colorScheme.onBackground
-)
-
 val infiniteAnimationState = rememberInfiniteAnimationState(
-    iconState = iconState
+    id = R.drawable.ic_timer
 )
 
 //Infinitely animating rotationZ value

@@ -1,6 +1,9 @@
+@file:Suppress("RedundantVisibilityModifier")
+
 package mir.oslav.jet.icons
 
 import android.util.Log
+import androidx.annotation.DrawableRes
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
@@ -14,6 +17,7 @@ import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.LifecycleEventObserver
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.launch
+import mir.oslav.jet.annotations.JetExperimental
 
 
 /**
@@ -44,8 +48,12 @@ public class InfiniteAnimationState internal constructor(
  * @see InfiniteAnimationEffect
  * @since 1.0.0
  */
+@Deprecated(
+    message = "Will be internal soon, use rememberInfiniteAnimationState(id= )",
+    replaceWith = ReplaceWith(expression ="rememberInfiniteAnimationState(id= )")
+)
 @Composable
-fun rememberInfiniteAnimationState(
+public fun rememberInfiniteAnimationState(
     iconState: AnimatedIconState,
 ): InfiniteAnimationState {
 
@@ -54,6 +62,13 @@ fun rememberInfiniteAnimationState(
     }
 
     return animationState
+}
+
+
+@Composable
+@JetExperimental
+public fun rememberInfiniteAnimationState(@DrawableRes id: Int): InfiniteAnimationState {
+    return rememberInfiniteAnimationState(iconState = rememberAnimatedIconState(id = id))
 }
 
 
@@ -67,12 +82,12 @@ fun rememberInfiniteAnimationState(
  * @since 1.0.0
  */
 @Composable
-fun InfiniteAnimationEffect(
+public fun InfiniteAnimationEffect(
     state: InfiniteAnimationState,
     block: suspend CoroutineScope.() -> Unit,
 ) {
     val lifecycle = LocalLifecycleOwner.current
-    //To preven block from multiple runs
+    //To prevent block from multiple runs
     var hasRunned by rememberSaveable { mutableStateOf(value = false) }
 
     LaunchedEffect(key1 = lifecycle.lifecycle, block = {

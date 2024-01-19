@@ -1,3 +1,5 @@
+@file:Suppress("RedundantVisibilityModifier", "unused")
+
 package mir.oslav.jet.icons
 
 import android.util.Log
@@ -10,10 +12,13 @@ import androidx.compose.runtime.DisposableEffect
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.geometry.Size
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.ColorFilter
 import androidx.compose.ui.graphics.CompositingStrategy
+import androidx.compose.ui.graphics.drawscope.DrawScope
 import androidx.compose.ui.graphics.graphicsLayer
+import androidx.compose.ui.graphics.painter.Painter
 import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.graphics.vector.VectorGroup
 import androidx.compose.ui.graphics.vector.VectorPainter
@@ -39,7 +44,6 @@ import mir.oslav.jet.annotations.JetExperimental
  * @author Miroslav Hýbler <br>
  * created on 26.11.2023
  */
-//TODO geters for paths and groups
 public class AnimatedIconState internal constructor(
     internal val animatedIcon: AnimatedIcon,
     internal val original: ImageVector
@@ -203,8 +207,12 @@ public class AnimatedIconState internal constructor(
  * Creates instance of [AnimatedIconState] using vector drawable [id] and remembers it. Animations work
  * a little different than in animated-vector drawables, all animations are relative to [AnimatedVectorPath]
  * including group animations like rotation, scale and translation. To see all possible properties
- * for animation look at [AnimatedVectorPath].
- * This is experimental and need to be opt-in.
+ * for animation look at [AnimatedVectorPath]. Always remember to name all paths and all groups in
+ * the animated vector drawable as they are saved into map based on it's names. See [AnimatedIcon]
+ * for more details.
+ * <b>Note:</b> This is experimental and need to be opt-in.
+ * @see AnimatedIconState
+ * @see AnimatedIcon
  * @since 1.0.0
  */
 @Composable
@@ -235,7 +243,6 @@ public fun rememberAnimatedIconState(
  * @param state
  * @since 1.0.0
  */
-//TODO enable default tint
 @Composable
 @JetExperimental
 public fun JetIcon(
@@ -255,6 +262,7 @@ public fun JetIcon(
                     RenderAnimatedVectorPath(animatedPath = path)
                 }
             )
+            
             Icon(
                 painter = painter,
                 contentDescription = null,
@@ -277,6 +285,7 @@ public fun JetIcon(
  */
 @Composable
 @JetExperimental
+@Deprecated(message = "Kind of useless")
 public fun JetImage(
     modifier: Modifier = Modifier,
     state: AnimatedIconState,
