@@ -3,11 +3,16 @@ package mir.oslav.jet.icons
 import androidx.annotation.FloatRange
 import androidx.compose.animation.core.Animatable
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.geometry.Offset
+import androidx.compose.ui.geometry.Rect
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.graphics.Path
 import androidx.compose.ui.graphics.TransformOrigin
 import androidx.compose.ui.graphics.graphicsLayer
 import androidx.compose.ui.graphics.vector.Path
+import androidx.compose.ui.graphics.vector.PathParser
 import androidx.compose.ui.graphics.vector.VectorPath
+import androidx.compose.ui.graphics.vector.toPath
 
 
 /**
@@ -22,6 +27,11 @@ public class AnimatedVectorPath internal constructor(
     defaultTintColor: Color,
     internal val vectorPath: VectorPath,
 ) {
+
+
+    companion object {
+        private val tempPath: Path = Path()
+    }
 
     /**
      * Animates fill alpha natively by calling [RenderAnimatedVectorPath] and [Path].
@@ -310,4 +320,14 @@ public class AnimatedVectorPath internal constructor(
         translationY.stop()
     }
 
+
+    /**
+     * @return Center point of this vector path
+     * @since 1.0.0
+     */
+    fun getCenter(): Offset {
+        tempPath.reset()
+        vectorPath.pathData.toPath(target = tempPath)
+        return tempPath.getBounds().center
+    }
 }
