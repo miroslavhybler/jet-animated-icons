@@ -1,6 +1,6 @@
 @file:Suppress("RedundantVisibilityModifier", "unused")
 
-package mir.oslav.jet.icons
+package com.jet.icon
 
 import android.util.Log
 import androidx.annotation.DrawableRes
@@ -8,17 +8,12 @@ import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.Box
 import androidx.compose.material3.Icon
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.DisposableEffect
 import androidx.compose.runtime.remember
-import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.geometry.Size
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.ColorFilter
 import androidx.compose.ui.graphics.CompositingStrategy
-import androidx.compose.ui.graphics.drawscope.DrawScope
 import androidx.compose.ui.graphics.graphicsLayer
-import androidx.compose.ui.graphics.painter.Painter
 import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.graphics.vector.VectorGroup
 import androidx.compose.ui.graphics.vector.VectorPainter
@@ -26,7 +21,6 @@ import androidx.compose.ui.graphics.vector.VectorPath
 import androidx.compose.ui.graphics.vector.rememberVectorPainter
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.vectorResource
-import androidx.compose.ui.unit.dp
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.launch
 import mir.oslav.jet.annotations.JetExperimental
@@ -48,6 +42,19 @@ public class AnimatedIconState internal constructor(
     internal val animatedIcon: AnimatedIcon,
     internal val original: ImageVector
 ) {
+
+
+    /**
+     * @since 1.0.0
+     */
+    val viewportWidth: Float get() = original.viewportWidth
+
+
+    /**
+     * @since 1.0.0
+     */
+    val viewportHeight: Float get() = original.viewportHeight
+
 
     /**
      * Animates path by given [name] calling the [block] on it. Tries to find path within the [animatedIcon]
@@ -238,9 +245,15 @@ public fun rememberAnimatedIconState(
 
 /**
  * Composable component to draw your [AnimatedIcon] using [AnimatedIconState]. Creates an [Icon] component
- * for every path from [AnimatedIcon] and draws it with [VectorPainter] with applied [AnimatedVectorPath.tintColor].
- * @param modifier
- * @param state
+ * for every path from [AnimatedIcon] and draws it with [VectorPainter].
+ * @param modifier [Modifier] to be applied to this icon
+ * @param state Icon state icon resource id of icon to be shown.
+ * @param contentDescription text used by accessibility services to describe what this icon
+ * represents. This should always be provided unless this icon is used for decorative purposes, and
+ * does not represent a meaningful action that a user can take. This text should be localized, such
+ * as by using [androidx.compose.ui.res.stringResource] or similar.
+ * @param tint Optional tint color of the icon. If value is null, original color of drawable's paths
+ * will be used. When non null, [tint] will be used and overrides all colors from drawable.
  * @since 1.0.0
  */
 @Composable
@@ -248,6 +261,8 @@ public fun rememberAnimatedIconState(
 public fun JetIcon(
     modifier: Modifier = Modifier,
     state: AnimatedIconState,
+    contentDescription: String?,
+    tint: Color? = null,
 ) {
     Box(modifier = modifier) {
         state.animatedIcon.allPaths.forEach { (_, path) ->
@@ -262,14 +277,14 @@ public fun JetIcon(
                     RenderAnimatedVectorPath(animatedPath = path)
                 }
             )
-            
+
             Icon(
                 painter = painter,
-                contentDescription = null,
+                contentDescription = contentDescription,
                 modifier = Modifier
                     .matchParentSize()
                     .jetIconModifier(path = path),
-                tint = path.tintColor.value
+                tint = tint ?: path.tintColor.value,
             )
         }
     }
@@ -279,18 +294,24 @@ public fun JetIcon(
 /**
  * Composable component to draw your [AnimatedIcon] using [AnimatedIconState]. Creates an [Image] component
  * for every path from [AnimatedIcon] and draws it with [VectorPainter].
- * @param modifier
- * @param state
+ * @param modifier [Modifier] to be applied to this icon
+ * @param state Icon state icon resource id of icon to be shown.
+ * @param contentDescription text used by accessibility services to describe what this icon
+ * represents. This should always be provided unless this icon is used for decorative purposes, and
+ * does not represent a meaningful action that a user can take. This text should be localized, such
+ * as by using [androidx.compose.ui.res.stringResource] or similar.
+ * @param colorFilter Optional color filter to be used.
  * @since 1.0.0
  */
 @Composable
 @JetExperimental
-@Deprecated(message = "Kind of useless")
+@Deprecated(message = "Kind of useless, use JetIcon instead")
 public fun JetImage(
     modifier: Modifier = Modifier,
     state: AnimatedIconState,
+    contentDescription: String?,
     colorFilter: ColorFilter? = null,
-    contentScale: ContentScale = ContentScale.None
+    contentScale: ContentScale = ContentScale.None,
 ) {
     Box(modifier = modifier) {
         state.animatedIcon.allPaths.forEach { (name, path) ->
@@ -308,7 +329,7 @@ public fun JetImage(
             )
             Image(
                 painter = painter,
-                contentDescription = null,
+                contentDescription = contentDescription,
                 modifier = Modifier
                     .matchParentSize()
                     .jetIconModifier(path = path),
@@ -381,6 +402,9 @@ private fun getJetIconData(
 }
 
 
+/**
+ * @since 1.0.0
+ */
 private fun getPaths(
     vectorGroup: VectorGroup,
     defaultTintColor: Color,

@@ -1,17 +1,16 @@
 @file:Suppress("RedundantVisibilityModifier")
 
-package mir.oslav.jet.icons
+package com.jet.icon
 
-import android.util.Log
 import androidx.annotation.DrawableRes
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
-import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.runtime.setValue
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalLifecycleOwner
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.LifecycleEventObserver
@@ -50,7 +49,7 @@ public class InfiniteAnimationState internal constructor(
  */
 @Deprecated(
     message = "Will be internal soon, use rememberInfiniteAnimationState(id= )",
-    replaceWith = ReplaceWith(expression ="rememberInfiniteAnimationState(id= )")
+    replaceWith = ReplaceWith(expression = "rememberInfiniteAnimationState(id= )")
 )
 @Composable
 public fun rememberInfiniteAnimationState(
@@ -67,8 +66,16 @@ public fun rememberInfiniteAnimationState(
 
 @Composable
 @JetExperimental
-public fun rememberInfiniteAnimationState(@DrawableRes id: Int): InfiniteAnimationState {
-    return rememberInfiniteAnimationState(iconState = rememberAnimatedIconState(id = id))
+public fun rememberInfiniteAnimationState(
+    @DrawableRes id: Int,
+    defaultTintColor: Color = Color.Unspecified,
+): InfiniteAnimationState {
+    return rememberInfiniteAnimationState(
+        iconState = rememberAnimatedIconState(
+            id = id,
+            defaultTintColor = defaultTintColor
+        )
+    )
 }
 
 

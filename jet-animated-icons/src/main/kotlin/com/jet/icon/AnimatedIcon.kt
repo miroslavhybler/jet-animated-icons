@@ -1,4 +1,4 @@
-package mir.oslav.jet.icons
+package com.jet.icon
 
 
 /**
@@ -20,7 +20,6 @@ internal class AnimatedIcon internal constructor(
     internal val allPaths: Map<String, AnimatedVectorPath>,
     internal val allGroups: Map<String, AnimatedVectorGroup>,
 ) {
-
 
     /**
      * Snaps all animations of all paths within this icon to the target state.

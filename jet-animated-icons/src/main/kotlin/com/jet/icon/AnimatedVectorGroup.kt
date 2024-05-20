@@ -1,9 +1,8 @@
 @file:Suppress("RedundantVisibilityModifier")
 
-package mir.oslav.jet.icons
+package com.jet.icon
 
 import android.util.Log
-import androidx.compose.animation.core.Animatable
 import androidx.compose.ui.graphics.vector.VectorGroup
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.launch
@@ -103,7 +102,7 @@ public class AnimatedVectorGroup internal constructor(
         val path = paths[name]
 
         require(value = path != null, lazyMessage = {
-            "Path \"$name\" was not found in group \"${name}\""
+            "Path \"$name\" was not found in group \"${this.name}\""
         })
 
         return path
@@ -121,7 +120,7 @@ public class AnimatedVectorGroup internal constructor(
         val group = groups[name]
 
         require(value = group != null, lazyMessage = {
-            "Group \"$name\" was not found in group \"${name}\""
+            "Group \"$name\" was not found in group \"${this.name}\""
         })
 
         return group

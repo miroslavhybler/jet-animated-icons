@@ -1,4 +1,4 @@
-package mir.oslav.jet.icons
+package com.jet.icon
 
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.graphics.vector.Group

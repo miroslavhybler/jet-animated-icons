@@ -42,11 +42,11 @@ import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
-import mir.oslav.jet.icons.InfiniteAnimationEffect
-import mir.oslav.jet.icons.JetIcon
-import mir.oslav.jet.icons.JetImage
-import mir.oslav.jet.icons.rememberAnimatedIconState
-import mir.oslav.jet.icons.rememberInfiniteAnimationState
+import com.jet.icon.InfiniteAnimationEffect
+import com.jet.icon.JetIcon
+import com.jet.icon.JetImage
+import com.jet.icon.rememberAnimatedIconState
+import com.jet.icon.rememberInfiniteAnimationState
 
 /**
  * @author Miroslav Hýbler <br>
@@ -148,7 +148,8 @@ fun LazyGridScope.infiniteColored() {
         JetImage(
             state = animationState.iconState,
             modifier = Modifier.size(size = 72.dp),
-            contentScale = ContentScale.Crop
+            contentScale = ContentScale.Crop,
+            contentDescription = null,
         )
     }
 }
@@ -165,7 +166,8 @@ fun LazyGridScope.onButtonClicked() {
 
         JetIcon(
             state = iconState,
-            modifier = Modifier.size(size = 72.dp)
+            modifier = Modifier.size(size = 72.dp),
+            contentDescription = null,
         )
 
         Button(
@@ -251,7 +253,8 @@ fun LazyGridScope.checkAnimation() {
 
         JetIcon(
             state = iconState,
-            modifier = Modifier.size(size = 72.dp)
+            modifier = Modifier.size(size = 72.dp),
+            contentDescription = null,
         )
     }
 }
@@ -268,7 +271,8 @@ fun LazyGridScope.rotationY() {
 
         JetIcon(
             state = iconState,
-            modifier = Modifier.size(size = 72.dp)
+            modifier = Modifier.size(size = 72.dp),
+            contentDescription = null,
         )
 
         Button(
@@ -354,7 +358,8 @@ fun LazyGridScope.smilingFace() {
 
         JetIcon(
             state = iconState,
-            modifier = Modifier.size(size = 72.dp)
+            modifier = Modifier.size(size = 72.dp),
+            contentDescription = null,
         )
     }
 }
@@ -406,7 +411,8 @@ fun LazyGridScope.wind() {
 
         JetIcon(
             state = iconState,
-            modifier = Modifier.size(size = 72.dp)
+            modifier = Modifier.size(size = 72.dp),
+            contentDescription = null,
         )
     }
 }
@@ -461,7 +467,9 @@ fun LazyGridScope.swipe() {
 
         JetIcon(
             state = animationState.iconState,
-            modifier = Modifier.size(size = 72.dp)
+            modifier = Modifier.size(size = 72.dp),
+            contentDescription = null,
+            tint = MaterialTheme.colorScheme.onBackground,
         )
     }
 }
