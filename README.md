@@ -22,7 +22,7 @@ dependencyResolutionManagement {
 **Application's module build.gradle.kts**
 ```kotlin
 dependencies {
-    implementation("com.github.miroslavhybler:animated-icons:1.0.0-alpha09")
+    implementation("com.github.miroslavhybler:jet-animated-icons:1.0.0-alpha09")
 }
 ```
 
