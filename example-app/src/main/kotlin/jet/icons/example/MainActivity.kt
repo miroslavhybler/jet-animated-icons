@@ -36,6 +36,7 @@ import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.TransformOrigin
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.text.style.TextOverflow
@@ -83,6 +84,7 @@ class MainActivity : ComponentActivity() {
                                 //wind()
                                 swipe()
                                 rotationY()
+                                tintAnimation()
                             },
                             contentPadding = paddingValues,
                             horizontalArrangement = Arrangement.spacedBy(space = 8.dp),
@@ -470,6 +472,47 @@ fun LazyGridScope.swipe() {
             modifier = Modifier.size(size = 72.dp),
             contentDescription = null,
             tint = MaterialTheme.colorScheme.onBackground,
+        )
+    }
+}
+
+
+fun LazyGridScope.tintAnimation() {
+    jetIconItem(title = "Tint Animation") {
+        val colorScheme = MaterialTheme.colorScheme
+        val animationState = rememberInfiniteAnimationState(
+            id = R.drawable.ic_sun,
+            defaultTintColor = colorScheme.onBackground
+        )
+
+        InfiniteAnimationEffect(state = animationState, block = {
+            var i = 0
+            while (true) {
+                animationState.iconState.animatePaths {
+                    launch {
+                        delay(timeMillis = 300L)
+                        tintColor.animateTo(
+                            targetValue = when (i) {
+                                0 -> Color.Red
+                                1 -> Color.Black
+                                else -> Color.Blue
+                            },
+                            animationSpec = tween(durationMillis = 1000)
+                        )
+                    }
+                }
+                delay(timeMillis = 1000)
+                i += 1
+                if (i == 3) {
+                    i = 0
+                }
+            }
+        })
+
+        JetIcon(
+            state = animationState.iconState,
+            modifier = Modifier.size(size = 72.dp),
+            contentDescription = null,
         )
     }
 }

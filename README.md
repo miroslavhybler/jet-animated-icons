@@ -7,6 +7,8 @@ All paths and groups withing drawable must have a name. Keep in mind that this l
 solution, not for the best one, for the best possible performance you have to override rememberVectorPainter
 by yourself.
 
+![Ilustration image](/images/example.gif)
+
 ## Add library to your project
 
 **Project's settings.gradle.kts**
