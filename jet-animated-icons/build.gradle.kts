@@ -44,14 +44,14 @@ android {
         buildConfig = true
     }
     compileOptions {
-        sourceCompatibility = JavaVersion.VERSION_1_8
-        targetCompatibility = JavaVersion.VERSION_1_8
+        sourceCompatibility = JavaVersion.VERSION_11
+        targetCompatibility = JavaVersion.VERSION_11
     }
     kotlinOptions {
-        jvmTarget = "1.8"
+        jvmTarget = "11"
     }
     kotlin {
-        jvmToolchain(jdkVersion = 8)
+        jvmToolchain(jdkVersion = 11)
     }
     publishing {
         multipleVariants {
@@ -63,10 +63,10 @@ android {
 
 java {
     toolchain {
-        languageVersion = JavaLanguageVersion.of(8)
+        languageVersion = JavaLanguageVersion.of(11)
     }
-    sourceCompatibility = JavaVersion.VERSION_1_8
-    targetCompatibility = JavaVersion.VERSION_1_8
+    sourceCompatibility = JavaVersion.VERSION_11
+    targetCompatibility = JavaVersion.VERSION_11
 }
 
 dependencies {
@@ -74,20 +74,21 @@ dependencies {
     implementation("com.github.miroslavhybler:jet-lint:1.0.2")
     //  implementation("com.github.miroslavhybler:jet-utils:1.0.2")
 
-    implementation("androidx.core:core-ktx:1.13.1")
+    implementation("androidx.core:core-ktx:1.16.0")
     implementation("androidx.appcompat:appcompat:1.7.0")
     implementation("com.google.android.material:material:1.12.0")
 
     /** Compose */
-    val composeVersion = "1.6.8"
+    val composeVersion = "1.8.2"
     implementation("androidx.compose.ui:ui:$composeVersion")
     implementation("androidx.compose.ui:ui-tooling-preview:$composeVersion")
-    implementation("androidx.activity:activity-compose:1.9.0")
     implementation("androidx.compose.material:material:$composeVersion")
-    val materialVersion = "1.2.1"
+    implementation("androidx.compose.animation:animation-graphics:${composeVersion}")
+    implementation("androidx.activity:activity-compose:1.10.1")
+
+    val materialVersion = "1.3.2"
     implementation("androidx.compose.material3:material3:$materialVersion")
     implementation("androidx.compose.material3:material3-window-size-class:${materialVersion}")
-    implementation("androidx.compose.animation:animation-graphics:1.6.8")
 
     testImplementation("junit:junit:4.13.2")
     androidTestImplementation("androidx.test.ext:junit:1.2.1")
@@ -128,9 +129,9 @@ afterEvaluate {
         publications {
             create<MavenPublication>("release") {
                 from(components.getByName("release"))
-                groupId = "mir.oslav.jet"
+                groupId = "com.jet"
                 artifactId = "animated-icons"
-                version = "1.0.0-alpha10"
+                version = "1.0.0-alpha11"
                 pom {
                     description.set("Jitpack.io deploy")
                 }

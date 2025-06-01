@@ -8,12 +8,14 @@ import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
+import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.platform.LocalLifecycleOwner
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.LifecycleEventObserver
+import androidx.lifecycle.compose.LifecycleEventEffect
+import androidx.lifecycle.compose.LocalLifecycleOwner
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.launch
 import mir.oslav.jet.annotations.JetExperimental
@@ -93,33 +95,26 @@ public fun InfiniteAnimationEffect(
     state: InfiniteAnimationState,
     block: suspend CoroutineScope.() -> Unit,
 ) {
-    val lifecycle = LocalLifecycleOwner.current
     //To prevent block from multiple runs
-    var hasRunned by rememberSaveable { mutableStateOf(value = false) }
+    var hasRan by rememberSaveable { mutableStateOf(value = false) }
+    val coroutineScope = rememberCoroutineScope()
 
-    LaunchedEffect(key1 = lifecycle.lifecycle, block = {
-        lifecycle.lifecycle.addObserver(LifecycleEventObserver { source, event ->
-            when (event) {
-                Lifecycle.Event.ON_RESUME -> {
-                    launch {
-                        state.iconState.snapToInitial()
-                        state.isRunning = true
-                        if (!hasRunned) {
-                            hasRunned = true
-                            block()
-                        }
-                    }
-                }
-
-                Lifecycle.Event.ON_PAUSE -> {
-                    launch {
-                        state.isRunning = false
-                        state.iconState.stop()
-                    }
-                }
-
-                else -> Unit
+    LifecycleEventEffect(event = Lifecycle.Event.ON_RESUME) {
+        coroutineScope.launch {
+            state.iconState.snapToInitial()
+            state.isRunning = true
+            if (!hasRan) {
+                hasRan = true
+                block()
             }
-        })
-    })
+
+        }
+    }
+
+    LifecycleEventEffect(event = Lifecycle.Event.ON_PAUSE) {
+        coroutineScope.launch {
+            state.isRunning = false
+            state.iconState.stop()
+        }
+    }
 }
